@@ -106,3 +106,4 @@ venv.bak/
 *.swp
 db.sqlite3
 /static/
+/streaming/dash/static/dash/media/
