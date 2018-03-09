@@ -74,18 +74,18 @@ def run_once(url, bw, delay, exp_num, duration, outdir):
         check_call(parser_command, stdout=fp)
 
 
-def main(url, outdir, bandwidths, delays, n, duration):
+def main(url, outdir, bandwidth, delay, n, duration):
     if os.path.exists(outdir):
         raise Exception('Output path already exists')
     os.makedirs(outdir)
 
-    num_experiments_left = n * len(bandwidths) * len(delays)
+    num_experiments_left = n * len(bandwidth) * len(delay)
     print ('Running {} experiments: est {}s'.format(
            num_experiments_left, num_experiments_left * duration))
 
     for i in range(n):
-        for bw in bandwidths:
-            for delay in delays:
+        for bw in bandwidth:
+            for delay in delay:
                 run_once(url, bw, delay, i, duration, outdir)
 
                 num_experiments_left -= 1
