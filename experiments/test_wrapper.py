@@ -10,9 +10,10 @@ DEFAULT_BANDWIDTHS = [i * 0.25 for i in range(1, 25)]
 DEFAULT_DELAYS = [25, 50, 100, 200, 500]
 
 SRC_DIR = os.path.dirname(os.path.realpath(__file__))
+SCRIPTS_DIR = os.path.join(SRC_DIR, 'scripts')
 
-CHROME_LOGGER_PATH = os.path.join(SRC_DIR, 'chrome_logger.py')
-LOG_PARSER_PATH = os.path.join(SRC_DIR, 'video_log_parser.py')
+CHROME_LOGGER_PATH = os.path.join(SCRIPTS_DIR, 'chrome_logger.py')
+LOG_PARSER_PATH = os.path.join(SCRIPTS_DIR, 'video_log_parser.py')
 
 
 def get_args():
@@ -20,10 +21,10 @@ def get_args():
     parser.add_argument('url', type=str, help='Dash server url')
     parser.add_argument('outdir', type=str,
                         help="Directory to store parsed log output to")
-    parser.add_argument('-bw', '--bandwidths', nargs='+',
+    parser.add_argument('-bw', '--bandwidth', nargs='+',
                         default=DEFAULT_BANDWIDTHS,
                         help='Fixed bandwidths in Mbps')
-    parser.add_argument('-d', '--delays', nargs='+', default=DEFAULT_DELAYS,
+    parser.add_argument('-d', '--delay', nargs='+', default=DEFAULT_DELAYS,
                         help='Fixed delays in ms')
     parser.add_argument('-n', type=int, default=1,
                         help='Number of trials')
