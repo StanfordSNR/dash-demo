@@ -3,7 +3,6 @@
 import argparse
 import os
 import math
-import tempfile
 from subprocess import check_call
 
 
