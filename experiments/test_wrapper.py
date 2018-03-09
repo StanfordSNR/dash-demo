@@ -85,8 +85,8 @@ def main(url, outdir, bandwidth, delay, n, duration):
 
     for i in range(n):
         for bw in bandwidth:
-            for delay in delay:
-                run_once(url, bw, delay, i, duration, outdir)
+            for d in delay:
+                run_once(url, bw, d, i, duration, outdir)
 
                 num_experiments_left -= 1
                 print ('{} experiments remaining: est {}s'.format(

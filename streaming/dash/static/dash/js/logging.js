@@ -12,8 +12,6 @@ function get_time() {
   return Date.now() - start_time;
 };
 
-console.log(LOG_PREFIX + ' startTime ' + start_time);
-
 video.onpause = function(e) {
   console.log(LOG_PREFIX + ' pause ' + get_time(), e);
 };
