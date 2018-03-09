@@ -34,33 +34,34 @@ def random_string(length):
 
 def main(url, duration, output):
     tmp_usr_dir = '{}-{}'.format(TMP_DATA_PREFIX, random_string(6))
-    try:
-        cmd = [
-            'google-chrome',
-            '--enable-logging',
-            '--v=0',
-            '--disable-application-cache',
-            '--no-first-run',
-            '--user-data-dir={}'.format(tmp_usr_dir),
-            url
-        ]
-        child = Popen(cmd, stdout=None, stderr=None)
+    with open('/dev/null', 'w') as devnull:
+        try:
+            cmd = [
+                'google-chrome',
+                '--enable-logging',
+                '--v=0',
+                '--disable-application-cache',
+                '--no-first-run',
+                '--user-data-dir={}'.format(tmp_usr_dir),
+                url
+            ]
+            child = Popen(cmd, stdout=devnull, stderr=devnull)
 
-        time.sleep(duration)
-        child.kill()
-        child.wait()
+            time.sleep(duration)
+            child.kill()
+            child.wait()
 
-        chrome_log_file = os.path.join(tmp_usr_dir, 'chrome_debug.log')
-        if not os.path.isfile(chrome_log_file):
-            raise Exception('No log output from chrome')
+            chrome_log_file = os.path.join(tmp_usr_dir, 'chrome_debug.log')
+            if not os.path.isfile(chrome_log_file):
+                raise Exception('No log output from chrome')
 
-        if output:
-            shutil.move(chrome_log_file, output)
-        else:
-            with open(chrome_log_file) as fp:
-                sys.stdout.write(fp.read())
-    finally:
-        shutil.rmtree(tmp_usr_dir)
+            if output:
+                shutil.move(chrome_log_file, output)
+            else:
+                with open(chrome_log_file) as fp:
+                    sys.stdout.write(fp.read())
+        finally:
+            shutil.rmtree(tmp_usr_dir)
 
 
 if __name__ == '__main__':
