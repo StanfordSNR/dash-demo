@@ -21,11 +21,11 @@ def get_args():
     parser.add_argument('url', type=str, help='Dash server url')
     parser.add_argument('outdir', type=str,
                         help="Directory to store parsed log output to")
-    parser.add_argument('-bw', '--bandwidth', nargs='+',
+    parser.add_argument('-bw', '--bandwidth', type=float, nargs='+',
                         default=DEFAULT_BANDWIDTHS,
                         help='Fixed bandwidths in Mbps')
     parser.add_argument('-d', '--delay', nargs='+', default=DEFAULT_DELAYS,
-                        help='Fixed delays in ms')
+                        type=int, help='Fixed delays in ms')
     parser.add_argument('-n', type=int, default=1,
                         help='Number of trials')
     parser.add_argument('-t', '--duration', type=int, default=900,
@@ -34,14 +34,16 @@ def get_args():
 
 
 PACKET_SIZE = 1504
-SCHEDULE_LEN = 10
+SCHEDULE_LEN = 100
 
 
 def bw_to_schedule(mbps):
-    pps = mbps / 8.0 / PACKET_SIZE
+    pps = mbps * (10 ** 6) / (8.0 * PACKET_SIZE)
     packet_times = []
+    accumulator = 0.0
     for i in range(SCHEDULE_LEN):
-        packet_times.append(math.ceil((i + 1) * pps))
+        accumulator += 1000.0 / pps
+        packet_times.append(math.ceil(accumulator))
     return packet_times
 
 
