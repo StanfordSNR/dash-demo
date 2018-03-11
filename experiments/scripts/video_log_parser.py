@@ -11,8 +11,8 @@ def get_args():
 
 
 VIDEO_EVENT_RE = re.compile(r'\"VIDEO_EVENT\s+(\w+)\s+(\d+)\",')
-DASH_FETCH_VIDEO_CHUNK_RE = re.compile(r'getNextFragment - request is http://[\w:\d]+/static/dash/media/(\d+x\d+-\d+)/(\d+).m4s')
-DASH_FETCH_AUDIO_CHUNK_RE = re.compile(r'getNextFragment - request is http://[\w:\d]+/static/dash/media/(\d+k)/(\d+).chk')
+DASH_FETCH_VIDEO_CHUNK_RE = re.compile(r'getNextFragment - request is http://[\w.:\d]+/static/dash/media/(\d+x\d+-\d+)/(\d+).m4s')
+DASH_FETCH_AUDIO_CHUNK_RE = re.compile(r'getNextFragment - request is http://[\w.:\d]+/static/dash/media/(\d+k)/(\d+).chk')
 
 TIMESTAMP_RE = re.compile(r'^\[\d+:\d+:\d+/(\d+\.\d+):INFO:CONSOLE\(\d+\)\]')
 
